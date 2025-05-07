@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -70,7 +69,13 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {clubLeagues.map((league) => (
               <Card key={league.name} className="bg-slate-700 border-slate-600 hover:bg-slate-600 transition-colors overflow-hidden group">
-                <Link to={`/league/${league.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                <Link to={`/league/${league.name.toLowerCase().replace(/\s+/g, '-').replace(/[а-яё]/gi, c => ({
+                  'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 
+                  'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 
+                  'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 
+                  'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '', 
+                  'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+                }[c.toLowerCase()] || c))}`}>
                   <CardContent className="p-0">
                     <div className={`h-20 ${league.bgColor} flex items-center justify-center`}>
                       <Icon name={league.icon} size={36} className="text-white transform group-hover:scale-110 transition-transform" />
